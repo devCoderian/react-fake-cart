@@ -1,11 +1,11 @@
-import CartList from '../components/CartList'
+import OrderList from '../components/OrderList'
 import MenuLayout from '../components/MenuLayout'
 
 
 const cart = () => {
    
      return(
-        <MenuLayout><CartList/></MenuLayout>
+        <MenuLayout><OrderList/></MenuLayout>
      )
 }
 

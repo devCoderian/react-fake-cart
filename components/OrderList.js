@@ -10,7 +10,7 @@ const data = [
     'Los Angeles battles huge wildfires.',
   ];
   
-const CartList = () => {
+const OrderList = () => {
     const orderListFooter = () =>{
         return(
             <>
@@ -53,4 +53,4 @@ const CartList = () => {
     )
 }
 
-export default CartList
+export default OrderList
