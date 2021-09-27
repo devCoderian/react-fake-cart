@@ -1,21 +1,27 @@
-import React from 'react'
+import React,{useState} from 'react'
 import PropTypes from 'prop-types'
 
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, PageHeader} from 'antd';
 import { UnorderedListOutlined, HomeOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
-import Link from 'next/link';
-
 import MenuHeader from './MenuHeader';
+import LoginFrom from './LoginForm';
+import Link from 'next/link';
 
 
 const MenuLayout = ({ children }) => {
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
     return (
         <Layout>
-            <MenuHeader />
+           <PageHeader
+            ghost={false}
+            title="FAKE-SHOP"
+            subTitle="by devCoderian"
+            extra={isLoggedIn?<MenuHeader />:<LoginFrom />}
+          ></PageHeader>
         <Layout>
           <Sider width={200} className="site-layout-background">
             <Menu
