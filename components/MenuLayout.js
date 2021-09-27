@@ -13,14 +13,15 @@ import Link from 'next/link';
 
 const MenuLayout = ({ children }) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLogIn, setIsLogIn] = useState(false);
+  const [cartNum, setCartNum] = useState(0);
     return (
         <Layout>
            <PageHeader
             ghost={false}
             title="FAKE-SHOP"
             subTitle="by devCoderian"
-            extra={isLoggedIn?<MenuHeader />:<LoginFrom />}
+            extra={isLogIn?<MenuHeader setIsLogIn={setIsLogIn} cartNum = {cartNum} />:<LoginFrom setIsLogIn={setIsLogIn}/>}
           ></PageHeader>
         <Layout>
           <Sider width={200} className="site-layout-background">
