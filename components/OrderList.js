@@ -1,16 +1,13 @@
 import React from 'react'
 import { List, Typography, Divider, Row, Col, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
-const data = [
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-  ];
-  
 const OrderList = () => {
+
+    const { Products }  = useSelector(state => state.cart);
+    console.log(Products);
+
     const orderListFooter = () =>{
         return(
             <>
@@ -28,20 +25,23 @@ const OrderList = () => {
     }
     return (
         <>
-        <Divider orientation="left">Default Size</Divider>
+        <Divider orientation="middle">주문서</Divider>
         <Row justify="center">
-            <Col span = {14} >
+            <Col span = {16} >
                 <List
                 header={<div>주문서</div>}
                 footer={orderListFooter()}
                 bordered
-                dataSource={data}
+                dataSource={Products}
                 renderItem={item => (
-                    <List.Item>
-                    <Col span = {10} >
-                    <Typography.Text mark>[ITEM]</Typography.Text> {item}
+                    <List.Item key={item.id}>
+                    <Col span = {12} >
+                    {item.title}
                     </Col>
-                    <Col span = {4} >
+                    <Col span = {2} >
+                    ${item.price}
+                    </Col>
+                    <Col span = {2} >
                     <Button shape="circle" icon={<MinusCircleOutlined />} />
                     </Col>
                     </List.Item>

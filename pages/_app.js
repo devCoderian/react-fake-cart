@@ -2,17 +2,19 @@ import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
 import Head from 'next/head'
 
-//모든 /pages 페이지 공통
+import wrapper from '../store/configureStore';
+
 const App = ({ Component }) => {
-    <Head> <title>Fake-shop</title></Head>
+   
     return (
-        <div>
+       <>
+        <Head> <title>Fake-shop</title></Head>
             <Component />
-        </div>
+       </>
     )
 }
 
 App.propTypes = {
     Component: PropTypes.elementType.isRequired,
 }
-export default App
+export default wrapper.withRedux(App);

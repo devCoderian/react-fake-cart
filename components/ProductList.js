@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useCallback, useState} from 'react'
 import { Row, Col } from 'antd'
 import { List, Button, Space,Card} from 'antd';
-import { DollarCircleOutlined, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
-const { Meta } = Card;
+import { DollarCircleOutlined, HeartOutlined, HeartTwoTone, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { addCartAction } from '../reducers/cart';
 
 const ProductList = () => {
+  
+  const dispatch = useDispatch();
+  const { Products }  = useSelector(state => state.cart);
+  console.log(Products);
+
+  const addCart = useCallback(() =>{
+    dispatch(addCartAction());
+  },[]);
+
+  const [liked, setLiked] = useState(false);
+  const onToggle = useCallback(() =>{
+    setLiked((prev) => !(prev));
+  },[]);
     const listData = [];
     for (let i = 0; i < 23; i++) {
       listData.push({
+        id:{i},
         href: 'https://ant.design',
         title: `ant design part ${i}`,
         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
@@ -40,10 +56,11 @@ const ProductList = () => {
                 dataSource={listData}
                 renderItem={item => (
                 <List.Item
-                    key={item.title}
+                    key={item.id}
                     actions={[
                     <IconText icon={DollarCircleOutlined} text={item.price} key="list-vertical-star-o" />,
-                    <Button icon={<ShoppingCartOutlined />}>
+                    liked?<HeartTwoTone  key ={item.id} twoToneColor = "red" onClick={onToggle}/>:<HeartOutlined onClick={onToggle} />,
+                    <Button icon={<ShoppingCartOutlined />} onClick={addCart}>
                     </Button>,
                     ]}
                     extra={
