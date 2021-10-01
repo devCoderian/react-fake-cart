@@ -1,12 +1,16 @@
 import React,{useState, useCallback} from 'react'
 import { Input, Space, Button, Form} from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { useDispatch } from 'react-redux';
-import { loginAction } from '../reducers/user';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequestAction } from '../reducers/user';
 
 const LoginForm = () => {
     
+
     const dispatch = useDispatch();
+    
+    const { loginLoading } = useSelector((state) => state.user);
+    
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     
@@ -19,7 +23,7 @@ const LoginForm = () => {
 
     const onSubmit = useCallback((e) =>{
         e.preventDefault();
-        dispatch(loginAction({userId, password}));
+        dispatch(loginRequestAction({userId, password}));
         //setIsLogIn(true);
     },[userId, password]);
 
@@ -33,7 +37,7 @@ const LoginForm = () => {
             iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
             
-            <Button type="primary" htmlType="submit" onClick={onSubmit}>
+            <Button type="primary" htmlType="submit" loading = {loginLoading}onClick={onSubmit}>
             Login
             </Button>
         </Space>

@@ -6,15 +6,16 @@ import { ShoppingCartOutlined} from '@ant-design/icons';
 import Link from 'next/link';
 
 import { useDispatch, useSelector} from 'react-redux';
-import { logoutAction } from '../reducers/user';
+import { logoutRequestAction } from '../reducers/user';
 
 const MenuHeader = () =>  {
 
   const dispatch = useDispatch();
   const logout = useCallback(() =>{
-      dispatch(logoutAction());
+      dispatch(logoutRequestAction());
     //Home으로 이동시키기
   },[]);
+  const { logoutLoading } = useSelector((state) => state.user)
   const { Products }  = useSelector(state => state.cart);
   
   const cartNum = Products? Products.length: 0;
@@ -27,7 +28,7 @@ const MenuHeader = () =>  {
       </Button>
     </Badge>
     
-    <Button key="1" onClick={logout}>
+    <Button loading = {logoutLoading} key="1" onClick={logout}>
       Logout
     </Button>
     </>

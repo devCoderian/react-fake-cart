@@ -1,10 +1,8 @@
 import OrderList from '../components/OrderList'
 import MenuLayout from '../components/MenuLayout'
-import { useSelector } from 'react-redux'
 
 
 const cart = () => {
-    const {isLogin} = useSelector((state) => state.user);
  
      return(
         <MenuLayout>

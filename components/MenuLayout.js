@@ -16,8 +16,10 @@ const MenuLayout = ({ children }) => {
 
   // const [isLogIn, setIsLogIn] = useState(false);
   // 리덕스로 변경
-  const { isLogin } = useSelector(state => state.user);
+  //const { loginDone } = useSelector(state => state.user);
   //isLogin이 바뀌면 알아서 useSelector 컴포넌트 리렌더링 된다. 
+  const {me}  =  useSelector((state) => state.user);
+  
   const [cartNum, setCartNum] = useState(0);
     
   return (
@@ -26,7 +28,7 @@ const MenuLayout = ({ children }) => {
             ghost={false}
             title="FAKE-SHOP"
             subTitle="by devCoderian"
-            extra={isLogin?<MenuHeader cartNum = {cartNum} />:<LoginFrom/>}
+            extra={me?<MenuHeader cartNum = {cartNum} />:<LoginFrom/>}
           ></PageHeader>
         <Layout>
           
@@ -40,7 +42,7 @@ const MenuLayout = ({ children }) => {
                 <Menu.Item key="1" icon={<HomeOutlined />}>
                 <Link href ="/">Home</Link>
                 </Menu.Item>
-                {isLogin&&<Menu.Item key="2" icon={<ShoppingCartOutlined />}>
+                {me&&<Menu.Item key="2" icon={<ShoppingCartOutlined />}>
                   <Link href ="/cart">My Cart</Link>
                 </Menu.Item>}
                 <SubMenu key="sub1" icon={<UnorderedListOutlined />} title="Product">
