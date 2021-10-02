@@ -1,16 +1,21 @@
-import React, { useCallback, useState} from 'react'
+import React, { useCallback, useState, useEffect} from 'react'
 import { Row, Col } from 'antd'
 import { List, Button, Space,Card} from 'antd';
 import { DollarCircleOutlined, HeartOutlined, HeartTwoTone, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { LoadProductAction } from '../reducers/product';
 import { addCartAction } from '../reducers/cart';
 
 const ProductList = () => {
   
   const dispatch = useDispatch();
-  const { Products }  = useSelector(state => state.cart);
+  const { Products, loadProductLoading }  = useSelector(state => state.product);
   console.log(Products);
+
+  const LoadProduct = useCallback(() =>{
+    dispatch(LoadProductAction());
+  },[]);
 
   const addCart = useCallback(() =>{
     dispatch(addCartAction());
@@ -20,6 +25,10 @@ const ProductList = () => {
   const onToggle = useCallback(() =>{
     setLiked((prev) => !(prev));
   },[]);
+
+  useEffect(() => {
+    LoadProduct();
+  }, []);
     const listData = [];
     for (let i = 0; i < 23; i++) {
       listData.push({
@@ -53,9 +62,11 @@ const ProductList = () => {
                 },
                 pageSize: 5,
                 }}
-                dataSource={listData}
+                loading = {loadProductLoading}
+                dataSource={Products}
                 renderItem={item => (
                 <List.Item
+                   
                     key={item.id}
                     actions={[
                     <IconText icon={DollarCircleOutlined} text={item.price} key="list-vertical-star-o" />,
@@ -65,9 +76,10 @@ const ProductList = () => {
                     ]}
                     extra={
                     <img
-                        width={272}
+                        width={150}
+                        height ={200}
                         alt="logo"
-                        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                        src={item.image}
                     />
                     }
                 >

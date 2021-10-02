@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const OrderList = () => {
 
-    const { Products }  = useSelector(state => state.cart);
+    const Products  = useSelector(state => state.product.Products.length !== 0 && state.product.Products);
     console.log(Products);
 
     const orderListFooter = () =>{

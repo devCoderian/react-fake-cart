@@ -3,6 +3,7 @@ import { HYDRATE } from 'next-redux-wrapper';
 
 import user from './user'
 import cart from './cart'
+import product from './product'
 
 import { combineReducers } from 'redux';
 
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
         }
     },
     user,
-    cart
+    cart,
+    product
 });
 
 export default rootReducer;
