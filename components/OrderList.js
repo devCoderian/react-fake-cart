@@ -1,50 +1,54 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useMemo} from 'react'
 import { List, Typography, Divider, Row, Col, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { LoadProductAction } from '../reducers/product';
-import { removeAllCartAction } from '../reducers/cart';
+import { removeAllCartAction, removeCartAction } from '../reducers/cart';
 const OrderList = () => {
     const { me } = useSelector((state) => state.user)
     const { Order }  = useSelector(state => state.cart);
     const dispatch = useDispatch();
-    // const { Order, diff }  = useSelector(
-    //     state => ({
-    //       Order: state.cart.Order,
-    //       diff: state.cart.diff
-    //     }),
-    //     shallowEqual 
-    //     );
-
-    // const { Products, loadProductLoading }  = useSelector(state => state.product);
-  
-    // const LoadProduct = useCallback(() =>{
-    //   dispatch(LoadProductAction());
-    // },[]);
-    console.log(Order);
-    const removeAllCart = useCallback(() =>{
-       
-        dispatch(removeAllCartAction());
-      },[]);
     
+    
+    const cal = useMemo(() =>{
+        let total =  Order.map ((order) =>{
+            const { id, quantity,price } = order;
+            console.log( quantity*order.price);
+            return quantity*order.price;
+        }).reduce((l, r)=> l+r, 0);
+        return total.toFixed(2);
+
+    },[Order]);
+
+
+   
+
+    const removeCart = useCallback((item) =>{
+        dispatch(removeCartAction(item));
+    },[]);
+    
+    const removeAllCart = useCallback(() =>{   
+        dispatch(removeAllCartAction());
+    },[]);
     const orderListFooter = () =>{
+    
+
         return(
             <>
-            <Divider></Divider>
-            <Row justify="space-between">
-                 <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4 }}>
-                 총 금액: $166
-                </Col>
-                <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4}}>
-                <Button>주문하기</Button>
-                </Col>
-                <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4}}>
-                <Button onClick ={removeAllCart}>전체 비우기</Button>
-                </Col>
-            </Row>
+                <Divider></Divider>
+                <Row justify="space-between">
+                    <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4 }}>
+                    총 금액: $ {cal}
+                    </Col>
+                    <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4}}>
+                    <Button>주문하기</Button>
+                    <Button onClick ={() => removeAllCart()}>전체 비우기</Button>
+                    </Col>
+                </Row>
             </>
         )
     }
+
     return (
         <>
         <Divider orientation="middle">주문서</Divider>
@@ -67,7 +71,7 @@ const OrderList = () => {
                     ${item.price}
                     </Col>
                     <Col span = {2} >
-                    <Button shape="circle" icon={<MinusCircleOutlined />} />
+                    <Button shape="circle" icon={<MinusCircleOutlined />} onClick = {() => removeCart(item.id)}/>
                     </Col>
                     </List.Item>
                 )}

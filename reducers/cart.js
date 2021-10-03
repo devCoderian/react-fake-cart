@@ -74,6 +74,9 @@ export const removeAllCartAction = () => {
 //     setOrders([]);
 // },[]);
 
+//Order = Order.filter(order => order.id !== action.data.id)
+
+
 const reducer = (state = initialState, action) => {
     switch(action.type){
         case ADD_CART_REQUEST:{
@@ -114,7 +117,28 @@ const reducer = (state = initialState, action) => {
             })
         }
         }
+        case REMOVE_CART_REQUEST:{
+            return{
+                ...state
+            }
+        }
+
+        case REMOVE_CART_SUCCEESS:{
+            let Order = [...state.Order];
+            Order.filter(order => order.id !== action.data);
+            console.log('remove',Order);
+            return{
+                ...state,
+                Order:Order.filter(order => order.id !== action.data)
+            }
+        }
+
         case REMOVE_ALL_CART_REQUEST:{
+            return{
+                ...state
+            }
+        }
+        case REMOVE_ALL_CART_SUCCEESS:{
            
             return{
                 ...state,

@@ -24,17 +24,37 @@ export default function* cartSaga(){
                 });
             }
         }
-        function* removeAllCartAction(){
+        function* removeCartAction(action){
             try{
                 //yield call해서 로그인 api를 실행함
                 //const result =  yield call(addCartAPI, action.data);
                 // yield delay(1000);
                 yield put({
+                    type: 'REMOVE_CART_SUCCEESS',
+                    data: action.data
+                });
+            }catch(err){
+                yield put({
+                    type: 'REMOVE_CART_FAILURE',
+                    data:err.response.data,
+                });
+            }
+        }
+
+
+        function* removeAllCartAction(){
+            try{
+                //yield call해서 로그인 api를 실행함
+                //const result =  yield call(addCartAPI, action.data);
+                // yield delay(1000);
+                console.log('remove_all');
+
+                yield put({
                     type: 'REMOVE_ALL_CART_SUCCEESS',
                 });
             }catch(err){
                 yield put({
-                    type: 'ADD_CART_FAILURE',
+                    type: 'REMOVE_ALL_CART_FAILURE',
                     data:err.response.data,
                 });
             }
@@ -46,10 +66,17 @@ export default function* cartSaga(){
         yield takeLatest('ADD_CART_REQUEST', addCartAction);
     }
 
+    function* watchRemoveCart(){
+        yield takeLatest('REMOVE_CART_REQUEST', removeCartAction);
+    }
+
     function* watchRemoveAllCart(){
         yield takeLatest('REMOVE_ALL_CART_REQUEST', removeAllCartAction);
     }
+
     yield all([
-        fork(watchAddCart)
+        fork(watchAddCart),
+        fork(watchRemoveCart),
+        fork(watchRemoveAllCart),
     ]);
 }
