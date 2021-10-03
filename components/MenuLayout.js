@@ -47,10 +47,10 @@ const MenuLayout = ({ children }) => {
                 </Menu.Item>
                 <SubMenu key="sub1" icon={<UnorderedListOutlined />} title="Product">
                     <Menu.Item key="3"><Link href ="/product">All</Link></Menu.Item>
-                    <Menu.Item key="4">Mens</Menu.Item>
-                    <Menu.Item key="5">Womens</Menu.Item>
-                    <Menu.Item key="6">jewelery</Menu.Item>
-                    <Menu.Item key="7">electronics</Menu.Item>
+                    <Menu.Item key="4"><Link href ="/product">Mens</Link></Menu.Item>
+                    <Menu.Item key="5"><Link href ="/product">Womens</Link></Menu.Item>
+                    <Menu.Item key="6"><Link href ="/product/category/jewelery">jewelery</Link></Menu.Item>
+                    <Menu.Item key="7"><Link href ="/product">electronics</Link></Menu.Item>
                 </SubMenu>
             </Menu>
           </Sider>

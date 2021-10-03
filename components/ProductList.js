@@ -15,18 +15,6 @@ const ProductList = () => {
   const { Order}  = useSelector(state => state.cart);
 
   console.log('Order',Order)
-  // const { Order, diff }  = useSelector(
-  //   state => ({
-  //     Order: state.cart.Order,
-  //     diff: state.cart.diff
-  //   }),
-  //   shallowEqual 
-  //   );
-
-
-  //   useEffect(() => {
-  //     console.log(message)           // 업데이트!
-  // },[Order]);
 
   const LoadProduct = useCallback(() =>{
     dispatch(LoadProductAction());
@@ -38,50 +26,15 @@ const ProductList = () => {
     dispatch(addCartAction(item));
   },[]);
 
-//   const addCart = useCallback((item) => {
-//           console.log(item.id, Order)
-//             const check = Order.find(order =>order.id === item.id);
-//             if(check === undefined){
-//               item.quantity = 1;
-//               console.log('first')
-//               dispatch(addCartAction(item));  
-//               // return {item, quantity: 1};
-//             }else{
-//                 Order.map((order)=>{
-//                     if(order.id === item.id){
-//                       console.log('중복')
-//                       order.quantity = order.quantity+1;
-//                       dispatch(addCartAction(order));
-//                     }
-//                   })
-//             }
-// },[Order]);
-
-
-//useSelector
-
-  const [liked, setLiked] = useState(false);
-  const onToggle = useCallback(() =>{
-    setLiked((prev) => !(prev));
-  },[]);
+  // const [liked, setLiked] = useState(false);
+  // const onToggle = useCallback(() =>{
+  //   setLiked((prev) => !(prev));
+  // },[]);
 
   useEffect(() => {
     LoadProduct();
   }, []);
-    const listData = [];
-    for (let i = 0; i < 23; i++) {
-      listData.push({
-        id:{i},
-        href: 'https://ant.design',
-        title: `ant design part ${i}`,
-        avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-        description:
-          'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content:
-          'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-          price: `${i}`
-        });
-    }
+
     const IconText = ({ icon, text }) => (
       <Space>
         {React.createElement(icon)}
@@ -109,7 +62,7 @@ const ProductList = () => {
                     key={item.id}
                     actions={[
                     <IconText icon={DollarCircleOutlined} text={item.price} key="list-vertical-star-o" />,
-                    liked?<HeartTwoTone  key ={item.id} twoToneColor = "red" onClick={onToggle}/>:<HeartOutlined onClick={onToggle} />,
+                    // liked?<HeartTwoTone  key ={item.id} twoToneColor = "red" onClick={onToggle}/>:<HeartOutlined onClick={onToggle} />,
                     <Button icon={<ShoppingCartOutlined />} onClick={() =>addCart(item)}>
                     </Button>,
                     ]}

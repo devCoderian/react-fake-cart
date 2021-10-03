@@ -47,7 +47,6 @@ export default function* cartSaga(){
                 //yield call해서 로그인 api를 실행함
                 //const result =  yield call(addCartAPI, action.data);
                 // yield delay(1000);
-                console.log('remove_all');
 
                 yield put({
                     type: 'REMOVE_ALL_CART_SUCCEESS',

@@ -25,9 +25,9 @@ export const REMOVE_CART_REQUEST = 'REMOVE_CART_REQUEST';
 export const REMOVE_CART_SUCCEESS = 'REMOVE_CART_SUCCEESS';
 export const REMOVE_CART_FAILURE = 'REMOVE_CART_FAILURE';
 
-export const REMOVE_ALL_CART_REQUEST = 'REMOVE_CART_REQUEST';
-export const REMOVE_ALL_CART_SUCCEESS = 'REMOVE_CART_SUCCEESS';
-export const REMOVE_ALL_CART_FAILURE = 'REMOVE_CART_FAILURE';
+export const REMOVE_ALL_CART_REQUEST = 'REMOVE_ALL_CART_REQUEST';
+export const REMOVE_ALL_CART_SUCCEESS = 'REMOVE_ALL_CART_SUCCEESS';
+export const REMOVE_ALL_CART_FAILURE = 'REMOVE_ALL_CART_FAILURE';
 
 
 // export const addCart = (data) => {
@@ -139,10 +139,10 @@ const reducer = (state = initialState, action) => {
             }
         }
         case REMOVE_ALL_CART_SUCCEESS:{
-           
+            console.log('removeALLALL',...state.Order.splice(0));
             return{
                 ...state,
-                Order: []
+                Order: [],
             }
         }
         default:

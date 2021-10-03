@@ -16,9 +16,9 @@ const MenuHeader = () =>  {
     //Home으로 이동시키기
   },[]);
   const { logoutLoading } = useSelector((state) => state.user)
-  const { Products }  = useSelector(state => state.cart);
+  const { Order }  = useSelector(state => state.cart);
   
-  const cartNum = Products? Products.length: 0;
+  const cartNum = Order? Order.length: 0;
 
   return(
     <>
