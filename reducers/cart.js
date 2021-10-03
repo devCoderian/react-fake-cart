@@ -21,6 +21,15 @@ export const ADD_CART_REQUEST = 'ADD_CART_REQUEST';
 export const ADD_CART_SUCCEESS = 'ADD_CART_SUCCEESS';
 export const ADD_CART_FAILURE = 'ADD_CART_FAILURE';
 
+export const REMOVE_CART_REQUEST = 'REMOVE_CART_REQUEST';
+export const REMOVE_CART_SUCCEESS = 'REMOVE_CART_SUCCEESS';
+export const REMOVE_CART_FAILURE = 'REMOVE_CART_FAILURE';
+
+export const REMOVE_ALL_CART_REQUEST = 'REMOVE_CART_REQUEST';
+export const REMOVE_ALL_CART_SUCCEESS = 'REMOVE_CART_SUCCEESS';
+export const REMOVE_ALL_CART_FAILURE = 'REMOVE_CART_FAILURE';
+
+
 // export const addCart = (data) => {
 //     return{
 //         type: ADD_CART,
@@ -34,50 +43,35 @@ export const addCartAction = (data) => {
     }
 }
 
+export const removeCartAction = (data) => {
+    return{
+        type: REMOVE_CART_REQUEST,
+        data
+    }
+}
+
+export const removeAllCartAction = () => {
+    return{
+        type: REMOVE_ALL_CART_REQUEST
+    }
+}
+
 // const dummyProduct = {
 //     id: 2,
 //     title: "Mens Casual Premium Slim Fit T-Shirts",
 //     price: 22.3,
 //     image: "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
 // }
-
-// const addCart = useCallback((item) => {
-//     console.log(item.id, Order)
-//       const check = Order.find(order =>order.id === item.id);
-//       if(check === undefined){
-//         item.quantity = 1;
-//         console.log('first')
-//         dispatch(addCartAction(item));  
-//         // return {item, quantity: 1};
-//       }else{
-//           Order.map((order)=>{
-//               if(order.id === item.id){
-//                 console.log('중복')
-//                 order.quantity = order.quantity+1;
-//                 dispatch(addCartAction(order));
-//               }
-//             })
-//       }
-// },[]); 
-
-
-// const addCart = useCallback((item) => {
-//     console.log(item.id, Order)
-//       const check = Order.find(order =>order.id === item.id);
-//       if(check === undefined){
-//         item.quantity = 1;
-//         console.log('first')
-//         dispatch(addCartAction(item));  
-//         // return {item, quantity: 1};
-//       }else{
-//           Order.map((order)=>{
-//               if(order.id === item.id){
-//                 console.log('중복')
-//                 order.quantity = order.quantity+1;
-//                 dispatch(addCartAction(order));
-//               }
-//             })
-//       }
+// const remove = useCallback(
+//     (id) => {
+//         setOrders(orders => {
+//             return orders.filter(order => order.id !== id)
+//         })
+//     },
+//     [],
+// )
+// const removeAll = useCallback(() => {
+//     setOrders([]);
 // },[]);
 
 const reducer = (state = initialState, action) => {
@@ -119,21 +113,13 @@ const reducer = (state = initialState, action) => {
                 }
             })
         }
-                // }else{
-                //     action.data.quantity = 1;
-                //     return{
-                //         ...state,
-                //         Order: [action.data, ...state.Order],
-                //         LoadOrderLoading: false,
-                //         LoadOrdertDone: true
-                //     }
-                // }
-            // return{
-            //     ...state,
-            //     Order: [action.data, ...state.Order],
-            //     LoadOrderLoading: false,
-            //     LoadOrdertDone: true
-            // }
+        }
+        case REMOVE_ALL_CART_REQUEST:{
+           
+            return{
+                ...state,
+                Order: []
+            }
         }
         default:
             return state;

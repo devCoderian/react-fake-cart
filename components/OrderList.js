@@ -1,13 +1,13 @@
-import React, {} from 'react'
+import React, {useCallback} from 'react'
 import { List, Typography, Divider, Row, Col, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { LoadProductAction } from '../reducers/product';
-
+import { removeAllCartAction } from '../reducers/cart';
 const OrderList = () => {
     const { me } = useSelector((state) => state.user)
     const { Order }  = useSelector(state => state.cart);
-
+    const dispatch = useDispatch();
     // const { Order, diff }  = useSelector(
     //     state => ({
     //       Order: state.cart.Order,
@@ -22,7 +22,11 @@ const OrderList = () => {
     //   dispatch(LoadProductAction());
     // },[]);
     console.log(Order);
-
+    const removeAllCart = useCallback(() =>{
+       
+        dispatch(removeAllCartAction());
+      },[]);
+    
     const orderListFooter = () =>{
         return(
             <>
@@ -33,6 +37,9 @@ const OrderList = () => {
                 </Col>
                 <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4}}>
                 <Button>주문하기</Button>
+                </Col>
+                <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 4}}>
+                <Button onClick ={removeAllCart}>전체 비우기</Button>
                 </Col>
             </Row>
             </>
