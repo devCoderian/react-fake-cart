@@ -40,7 +40,7 @@ export default function* userSaga(){
         try{
             //yield call해서 로그인 api를 실행함
             //const result =  yield call(logOutAPI); ->  data: result.data
-            yield delay(2000);
+            yield delay(1000);
             yield put({
                 type: 'LOG_OUT_SUCCESS'
             });

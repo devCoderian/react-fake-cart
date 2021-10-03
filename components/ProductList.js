@@ -3,23 +3,62 @@ import { Row, Col } from 'antd'
 import { List, Button, Space,Card} from 'antd';
 import { DollarCircleOutlined, HeartOutlined, HeartTwoTone, ShoppingCartOutlined, StarOutlined } from '@ant-design/icons';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual} from 'react-redux';
 import { LoadProductAction } from '../reducers/product';
 import { addCartAction } from '../reducers/cart';
 
 const ProductList = () => {
   
-  const dispatch = useDispatch();
+
   const { Products, loadProductLoading }  = useSelector(state => state.product);
-  console.log(Products);
+  const dispatch = useDispatch();
+  const { Order}  = useSelector(state => state.cart);
+
+  console.log('Order',Order)
+  // const { Order, diff }  = useSelector(
+  //   state => ({
+  //     Order: state.cart.Order,
+  //     diff: state.cart.diff
+  //   }),
+  //   shallowEqual 
+  //   );
+
+
+  //   useEffect(() => {
+  //     console.log(message)           // 업데이트!
+  // },[Order]);
 
   const LoadProduct = useCallback(() =>{
     dispatch(LoadProductAction());
   },[]);
 
-  const addCart = useCallback(() =>{
-    dispatch(addCartAction());
+
+  const addCart = useCallback((item) =>{
+    console.log('item',item)
+    dispatch(addCartAction(item));
   },[]);
+
+//   const addCart = useCallback((item) => {
+//           console.log(item.id, Order)
+//             const check = Order.find(order =>order.id === item.id);
+//             if(check === undefined){
+//               item.quantity = 1;
+//               console.log('first')
+//               dispatch(addCartAction(item));  
+//               // return {item, quantity: 1};
+//             }else{
+//                 Order.map((order)=>{
+//                     if(order.id === item.id){
+//                       console.log('중복')
+//                       order.quantity = order.quantity+1;
+//                       dispatch(addCartAction(order));
+//                     }
+//                   })
+//             }
+// },[Order]);
+
+
+//useSelector
 
   const [liked, setLiked] = useState(false);
   const onToggle = useCallback(() =>{
@@ -71,7 +110,7 @@ const ProductList = () => {
                     actions={[
                     <IconText icon={DollarCircleOutlined} text={item.price} key="list-vertical-star-o" />,
                     liked?<HeartTwoTone  key ={item.id} twoToneColor = "red" onClick={onToggle}/>:<HeartOutlined onClick={onToggle} />,
-                    <Button icon={<ShoppingCartOutlined />} onClick={addCart}>
+                    <Button icon={<ShoppingCartOutlined />} onClick={() =>addCart(item)}>
                     </Button>,
                     ]}
                     extra={
@@ -95,5 +134,4 @@ const ProductList = () => {
         </Row>
     )
 }
-
 export default ProductList

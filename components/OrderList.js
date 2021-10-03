@@ -1,12 +1,27 @@
-import React from 'react'
+import React, {} from 'react'
 import { List, Typography, Divider, Row, Col, Button } from 'antd';
 import { MinusCircleOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
+import { LoadProductAction } from '../reducers/product';
 
 const OrderList = () => {
+    const { me } = useSelector((state) => state.user)
+    const { Order }  = useSelector(state => state.cart);
 
-    const Products  = useSelector(state => state.product.Products.length !== 0 && state.product.Products);
-    console.log(Products);
+    // const { Order, diff }  = useSelector(
+    //     state => ({
+    //       Order: state.cart.Order,
+    //       diff: state.cart.diff
+    //     }),
+    //     shallowEqual 
+    //     );
+
+    // const { Products, loadProductLoading }  = useSelector(state => state.product);
+  
+    // const LoadProduct = useCallback(() =>{
+    //   dispatch(LoadProductAction());
+    // },[]);
+    console.log(Order);
 
     const orderListFooter = () =>{
         return(
@@ -27,16 +42,19 @@ const OrderList = () => {
         <>
         <Divider orientation="middle">주문서</Divider>
         <Row justify="center">
-            <Col span = {16} >
+            <Col span = {18} >
                 <List
                 header={<div>주문서</div>}
                 footer={orderListFooter()}
                 bordered
-                dataSource={Products}
+                dataSource={Order}
                 renderItem={item => (
                     <List.Item key={item.id}>
                     <Col span = {12} >
                     {item.title}
+                    </Col>
+                    <Col span = {2} >
+                    X{item.quantity}
                     </Col>
                     <Col span = {2} >
                     ${item.price}

@@ -1,4 +1,4 @@
-import { all, fork, takeLatest, delay, put } from "@redux-saga/core/effects";
+import { all, fork, takeLatest, delay, put} from "@redux-saga/core/effects";
 export default function* cartSaga(){
     
 
@@ -8,14 +8,14 @@ export default function* cartSaga(){
 
         }
 
-        function* addCart(action){
+        function* addCartAction(action){
             try{
                 //yield call해서 로그인 api를 실행함
                 //const result =  yield call(addCartAPI, action.data);
-                yield delay(1000);
+                // yield delay(1000);
                 yield put({
-                    type: 'ADD_CART_SUCCESS',
-                    data: result.data
+                    type: 'ADD_CART_SUCCEESS',
+                    data: action.data
                 });
             }catch(err){
                 yield put({
@@ -28,7 +28,7 @@ export default function* cartSaga(){
         
 
     function* watchAddCart(){
-        yield takeLatest('ADD_CART_REQUEST', addCart);
+        yield takeLatest('ADD_CART_REQUEST', addCartAction);
     }
 
     yield all([

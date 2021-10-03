@@ -42,9 +42,9 @@ const MenuLayout = ({ children }) => {
                 <Menu.Item key="1" icon={<HomeOutlined />}>
                 <Link href ="/">Home</Link>
                 </Menu.Item>
-                {me&&<Menu.Item key="2" icon={<ShoppingCartOutlined />}>
+                  <Menu.Item key="2" icon={<ShoppingCartOutlined />}>
                   <Link href ="/cart">My Cart</Link>
-                </Menu.Item>}
+                </Menu.Item>
                 <SubMenu key="sub1" icon={<UnorderedListOutlined />} title="Product">
                     <Menu.Item key="3"><Link href ="/product">All</Link></Menu.Item>
                     <Menu.Item key="4">Mens</Menu.Item>
