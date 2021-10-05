@@ -103,20 +103,16 @@ const reducer = (state = initialState, action) => {
                         }
                 }else{
                 Order.map((order)=>{
-                    console.log(order, 'order')
-                if(order.id === action.data.id){    
                   console.log('중복')
                   action.data.quantity = order.quantity+1;
                   return{
                     ...state,
-                    // Order:[{quantity: action.data.quantity}],
                     Order: [...state.Order, { quantity: action.data.quantity}],
                     LoadOrderLoading: false,
                     LoadOrdertDone: true
                     }
-                }
-            })
-        }
+                })
+            }
         }
         case REMOVE_CART_REQUEST:{
             return{
