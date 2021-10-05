@@ -14,7 +14,6 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const { Order}  = useSelector(state => state.cart);
   const { me } = useSelector(state => state.user);
-  console.log('Order',Order)
 
   const LoadProduct = useCallback(() =>{
     dispatch(LoadProductAction());
