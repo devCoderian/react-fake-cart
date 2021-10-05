@@ -13,7 +13,7 @@ const ProductList = () => {
   const { Products, loadProductLoading }  = useSelector(state => state.product);
   const dispatch = useDispatch();
   const { Order}  = useSelector(state => state.cart);
-
+  const { me } = useSelector(state => state.user);
   console.log('Order',Order)
 
   const LoadProduct = useCallback(() =>{
@@ -63,7 +63,7 @@ const ProductList = () => {
                     actions={[
                     <IconText icon={DollarCircleOutlined} text={item.price} key="list-vertical-star-o" />,
                     // liked?<HeartTwoTone  key ={item.id} twoToneColor = "red" onClick={onToggle}/>:<HeartOutlined onClick={onToggle} />,
-                    <Button icon={<ShoppingCartOutlined />} onClick={() =>addCart(item)}>
+                    me&& <Button icon={<ShoppingCartOutlined />} onClick={() =>addCart(item)}>
                     </Button>,
                     ]}
                     extra={

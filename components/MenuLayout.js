@@ -1,8 +1,8 @@
-import React,{useState} from 'react'
+import React,{useRef, useState,useMemo} from 'react'
 import PropTypes from 'prop-types'
 import { useSelector } from 'react-redux';
 
-import { Layout, Menu, PageHeader} from 'antd';
+import { Layout, Menu, PageHeader, Button} from 'antd';
 import { UnorderedListOutlined, HomeOutlined, ShoppingCartOutlined} from '@ant-design/icons';
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -19,20 +19,19 @@ const MenuLayout = ({ children }) => {
   //const { loginDone } = useSelector(state => state.user);
   //isLogin이 바뀌면 알아서 useSelector 컴포넌트 리렌더링 된다. 
   const {me}  =  useSelector((state) => state.user);
-  
-  const [cartNum, setCartNum] = useState(0);
-    
+
   return (
         <Layout>
            <PageHeader
             ghost={false}
-            title="FAKE-SHOP"
+            title={<Button size='large' shape="round"><Link href ="/product">FAKE-SHOP</Link></Button>} 
             subTitle="by devCoderian"
-            extra={me?<MenuHeader cartNum = {cartNum} />:<LoginFrom/>}
-          ></PageHeader>
+            extra={me?<MenuHeader/>:<LoginFrom/>}
+            ></PageHeader>
         <Layout>
+        
           
-          <Sider width={200} className="site-layout-background">
+          {/* <Sider width={200} className="site-layout-background">
             <Menu
               mode="inline"
               defaultOpenKeys={['sub1']}
@@ -53,7 +52,7 @@ const MenuLayout = ({ children }) => {
                     <Menu.Item key="7"><Link href ="/product">electronics</Link></Menu.Item>
                 </SubMenu>
             </Menu>
-          </Sider>
+          </Sider> */}
 
           <Layout>
             <Content

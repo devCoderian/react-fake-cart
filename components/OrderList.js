@@ -18,7 +18,7 @@ const OrderList = () => {
     
     const cal = useMemo(() =>{
         let total =  Order.map ((order) =>{
-            const { id, quantity,price } = order;
+            const { quantity } = order;
             console.log( quantity*order.price);
             return quantity*order.price;
         }).reduce((l, r)=> l+r, 0);

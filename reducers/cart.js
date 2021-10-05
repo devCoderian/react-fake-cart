@@ -106,7 +106,8 @@ const reducer = (state = initialState, action) => {
                     console.log(order, 'order')
                 if(order.id === action.data.id){    
                   console.log('중복')
-                  order.quantity = order.quantity+1;
+                //   order.quantity = order.quantity+1;
+                  action.data.quantity = order.quantity+1
                   return{
                     ...state,
                     Order: [action.data, ...state.Order],
