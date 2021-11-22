@@ -25,7 +25,7 @@ export default function* productSaga(){
 
     function* searchProduct() {
         try {
-          const result = yield call(loadProductAPI, '');
+          const result = yield call(loadProductAPI, action.data);
           yield put({
             type: 'SEARCH_PRODUCT_SUCCESS',
             data: result.data

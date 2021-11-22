@@ -72,10 +72,11 @@ const reducer = (state = initialState, action) => {
                 }
         }
         case SEARCH_PRODUCT_SUCCESS:{
-          
             return{
                 ...state,
                 Products: action.data.filter((item)=>{
+                    let title = item.title.split(" ");
+                    console.log('title', title);
                     return item.title.toLocaleUpperCase().includes(...state.searchVal.toLocaleUpperCase())
                    }),
                 loadProductLoading: false,
