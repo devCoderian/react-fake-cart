@@ -19,7 +19,7 @@ export default function* productSaga(){
           yield put({
             type: 'LOAD_PRODUCT_FAILURE',
             error: err.response.data,
-          });s
+          });
         }
       }
 

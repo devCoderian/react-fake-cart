@@ -3,6 +3,7 @@ import { Input, Space, Button, Form} from 'antd';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequestAction } from '../reducers/user';
+import SignUpForm from './SignUpForm';
 
 const LoginForm = () => {
     
@@ -29,6 +30,7 @@ const LoginForm = () => {
 
     return (
         <Space direction="horizontal">
+            <SignUpForm />
             <Input type="text" value = {userId} onChange={onChangeId} placeholder="input username" />
             <Input.Password
             value = {password} 
